@@ -12,7 +12,14 @@ const findPost = async (id) => {
   return post;
 };
 
+// 게시글 삭제
+const destroyPost = async (id) => {
+  const result = await Board.destroy({ where: { id } });
+  return result;
+};
+
 module.exports = {
   createPost,
   findPost,
+  destroyPost,
 };
