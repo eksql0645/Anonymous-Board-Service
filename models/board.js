@@ -7,8 +7,12 @@ const createPost = async (postInfo) => {
 };
 
 // 전체 게시글 조회
-const findPosts = async () => {
-  const posts = await Board.findAll({});
+const findPosts = async (offset) => {
+  const posts = await Board.findAll({
+    order: [["createdAt", "DESC"]],
+    limit: 20,
+    offset: offset,
+  });
   return posts;
 };
 

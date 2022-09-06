@@ -24,7 +24,12 @@ const addPost = async (req, res, next) => {
 // 게시글 전체 조회
 const getPosts = async (req, res, next) => {
   try {
-    const posts = await boardModel.findPosts();
+    const { page } = req.query;
+    let offset = 0;
+    if (page > 1) {
+      offset = 20 * (page - 1);
+    }
+    const posts = await boardModel.findPosts(offset);
 
     // 게시글이 없는 경우
     if (posts.length === 0) {
