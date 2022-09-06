@@ -14,6 +14,7 @@ router.post(
   passwordValidator(),
   boardService.addPost
 );
+router.get("/", boardService.getPosts);
 router.get("/:id", boardService.getPost);
 router.patch(
   "/:id",

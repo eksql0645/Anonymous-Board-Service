@@ -6,6 +6,12 @@ const createPost = async (postInfo) => {
   return post;
 };
 
+// 전체 게시글 조회
+const findPosts = async () => {
+  const posts = await Board.findAll({});
+  return posts;
+};
+
 // 게시글 조회
 const findPost = async (id) => {
   const post = await Board.findOne({ where: { id } });
@@ -27,6 +33,7 @@ const destroyPost = async (id) => {
 module.exports = {
   createPost,
   findPost,
+  findPosts,
   destroyPost,
   updatePost,
 };
