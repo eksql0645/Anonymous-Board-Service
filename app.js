@@ -5,7 +5,7 @@ const { sequelize } = require("./db");
 const dotenv = require("dotenv");
 const routes = require("./routes");
 const errorHandler = require("./middlewares/errorHandler");
-// const { swaggerUi, specs } = require("./swagger/swagger");
+const { swaggerUi, specs } = require("./swagger");
 
 dotenv.config();
 
@@ -25,8 +25,8 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/api", routes);
 app.use(errorHandler);
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 module.exports = app;
