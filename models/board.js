@@ -12,6 +12,12 @@ const findPost = async (id) => {
   return post;
 };
 
+// 게시글 수정
+const updatePost = async (id, title, content) => {
+  const result = await Board.update({ title, content }, { where: { id } });
+  return result;
+};
+
 // 게시글 삭제
 const destroyPost = async (id) => {
   const result = await Board.destroy({ where: { id } });
@@ -22,4 +28,5 @@ module.exports = {
   createPost,
   findPost,
   destroyPost,
+  updatePost,
 };

@@ -39,6 +39,39 @@ const getPost = async (req, res, next) => {
   }
 };
 
+// 게시글 수정
+const setPost = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, content, password } = req.body;
+
+    // 해당 게시글이 있는지 확인
+    let post = await boardModel.findPost(id);
+    if (!post) {
+      throw new Error("게시글이 존재하지 않습니다.");
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, post.password);
+    if (!isPasswordCorrect) {
+      throw new Error("비밀번호가 일치하지 않습니다.");
+    }
+
+    const result = await boardModel.updatePost(id, title, content, password);
+
+    // 수정되지 않은 경우
+    if (result[0] === 0) {
+      throw new Error("게시글이 수정되지 않았습니다.");
+    }
+
+    // 프론트가 있다는 가정 하에 수정된 post 객체를 보냄
+    post = await boardModel.findPost(id);
+
+    res.status(201).json(post);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // 게시글 삭제
 const deletePost = async (req, res, next) => {
   try {
@@ -68,4 +101,4 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-module.exports = { addPost, getPost, deletePost };
+module.exports = { addPost, getPost, deletePost, setPost };
