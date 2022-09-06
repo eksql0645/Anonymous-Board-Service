@@ -6,6 +6,13 @@ const createPost = async (postInfo) => {
   return post;
 };
 
+// 게시글 조회
+const findPost = async (id) => {
+  const post = await Board.findOne({ where: { id } });
+  return post;
+};
+
 module.exports = {
   createPost,
+  findPost,
 };
