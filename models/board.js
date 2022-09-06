@@ -1,4 +1,4 @@
-const Board = require("../db/models/board");
+const { Board } = require("../db");
 
 // 게시글 생성
 const createPost = async (postInfo) => {

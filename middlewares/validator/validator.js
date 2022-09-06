@@ -7,7 +7,7 @@ const errorCodes = require("../../codes/errorCodes");
  * title : required, maxLength : 20
  * content : required, maxLength : 200
  * name : required, maxLength : 10
- * password : required, length : 8 ~ 15, (숫자, 대소문자, 특수문자 포함)
+ * password : required, length : 6 ~ 15, (숫자, 대소문자, 특수문자 포함)
  */
 function validator() {
   return [
@@ -31,6 +31,13 @@ function validator() {
       .withMessage(errorCodes.required)
       .trim()
       .isLength({ max: 10 })
+      .withMessage(errorCodes.wrongFormat),
+    body("password")
+      .notEmpty()
+      .bail()
+      .withMessage(errorCodes.required)
+      .trim()
+      .isLength({ min: 6, max: 15 })
       .withMessage(errorCodes.wrongFormat)
       .matches(/[A-za-z]/)
       .bail()
@@ -40,13 +47,6 @@ function validator() {
       .withMessage(errorCodes.wrongPwdFormat)
       .matches(/[0-9]/)
       .withMessage(errorCodes.wrongPwdFormat),
-    body("password")
-      .notEmpty()
-      .bail()
-      .withMessage(errorCodes.required)
-      .trim()
-      .isLength({ min: 6, max: 15 })
-      .withMessage(errorCodes.wrongFormat),
     index,
   ];
 }
