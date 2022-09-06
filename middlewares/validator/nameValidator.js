@@ -2,22 +2,21 @@ const { body } = require("express-validator");
 const index = require("./index");
 const errorCodes = require("../../codes/errorCodes");
 /**
- * <board의 post create, update 시 password에 대한 검증 로직>
+ * <boar의 post update 시 name에 대한 검증 로직>
  *
- * password : required, length : 6 ~ 15
+ * name : required, maxLength : 10
  */
-function passwordValidator() {
+function nameValidator() {
   return [
-    body("password")
+    body("name")
       .notEmpty()
       .bail()
       .withMessage(errorCodes.required)
       .trim()
-      .isLength({ min: 6, max: 15 })
-      .bail()
+      .isLength({ max: 10 })
       .withMessage(errorCodes.wrongFormat),
     index,
   ];
 }
 
-module.exports = { passwordValidator };
+module.exports = { nameValidator };
