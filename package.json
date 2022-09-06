@@ -1,0 +1,41 @@
+{
+  "name": "anonnymousboard",
+  "version": "1.0.0",
+  "description": "익명게시판",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eksql0645/Anonymous-Board-Service.git"
+  },
+  "author": "jks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eksql0645/Anonymous-Board-Service/issues"
+  },
+  "homepage": "https://github.com/eksql0645/Anonymous-Board-Service#readme",
+  "dependencies": {
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.4",
+    "morgan": "^1.10.0",
+    "cors": "^2.8.5",
+    "bcrypt": "^5.0.1",
+    "express-validator": "^6.14.2",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
+    "prettier": "^2.7.1",
+    "sequelize-cli": "^6.4.1",
+    "@babel/eslint-parser": "^7.18.9",
+    "dotenv": "^16.0.2",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.19"
+  }
+}
