@@ -21,6 +21,22 @@ const addPost = async (req, res, next) => {
   }
 };
 
+// 게시글 전체 조회
+const getPosts = async (req, res, next) => {
+  try {
+    const posts = await boardModel.findPosts();
+
+    // 게시글이 없는 경우
+    if (posts.length === 0) {
+      throw new Error("조회할 게시글이 없습니다.");
+    }
+
+    res.status(200).json(posts);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // 게시글 조회
 const getPost = async (req, res, next) => {
   try {
@@ -101,4 +117,4 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-module.exports = { addPost, getPost, deletePost, setPost };
+module.exports = { addPost, getPost, getPosts, deletePost, setPost };
