@@ -1,11 +1,11 @@
 const { boardModel } = require("../models");
 const bcrypt = require("bcrypt");
-
+const weatherAPI = require("../middlewares/weather");
 // 게시글 생성
 const addPost = async (req, res, next) => {
   try {
-    const { title, content, name, password, weather } = req.body;
-
+    const { title, content, name, password } = req.body;
+    const weather = await weatherAPI();
     const postInfo = {
       title,
       content,
