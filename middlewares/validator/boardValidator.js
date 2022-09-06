@@ -9,7 +9,7 @@ const errorCodes = require("../../codes/errorCodes");
  * name : required, maxLength : 10
  * password : required, length : 6 ~ 15, (숫자, 대소문자, 특수문자 포함)
  */
-function validator() {
+function boardValidator() {
   return [
     body("title")
       .notEmpty()
@@ -32,23 +32,8 @@ function validator() {
       .trim()
       .isLength({ max: 10 })
       .withMessage(errorCodes.wrongFormat),
-    body("password")
-      .notEmpty()
-      .bail()
-      .withMessage(errorCodes.required)
-      .trim()
-      .isLength({ min: 6, max: 15 })
-      .withMessage(errorCodes.wrongFormat)
-      .matches(/[A-za-z]/)
-      .bail()
-      .withMessage(errorCodes.wrongPwdFormat)
-      .matches(/[~!@#$%^&*()_+|<>?:{}]/)
-      .bail()
-      .withMessage(errorCodes.wrongPwdFormat)
-      .matches(/[0-9]/)
-      .withMessage(errorCodes.wrongPwdFormat),
     index,
   ];
 }
 
-module.exports = { validator };
+module.exports = { boardValidator };
