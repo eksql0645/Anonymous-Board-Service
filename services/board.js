@@ -1,6 +1,6 @@
 const { boardModel } = require("../models");
 const bcrypt = require("bcrypt");
-const weatherAPI = require("../middlewares/weather");
+const weatherAPI = require("./weather");
 const errorCodes = require("../codes/errorCodes");
 
 // 게시글 생성
