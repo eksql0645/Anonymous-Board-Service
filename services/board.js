@@ -7,7 +7,7 @@ const errorCodes = require("../codes/errorCodes");
 const addPost = async (req, res, next) => {
   try {
     const { title, content, name, password } = req.body;
-    const weather = await weatherAPI();
+    const weather = await weatherAPI(req.ip || req.ips);
     const postInfo = {
       title,
       content,
@@ -33,8 +33,9 @@ const addPost = async (req, res, next) => {
 // 게시글 전체 조회
 const getPosts = async (req, res, next) => {
   try {
-    const { page } = req.query;
+    const page = parseInt(req.query.page);
     let offset = 0;
+
     if (page > 1) {
       offset = 20 * (page - 1);
     }
@@ -87,7 +88,7 @@ const setPost = async (req, res, next) => {
       throw new Error(errorCodes.notEqualPassword);
     }
 
-    const result = await boardModel.updatePost(id, title, content, password);
+    const result = await boardModel.updatePost(id, title, content);
 
     // 수정되지 않은 경우
     if (result[0] === 0) {
@@ -110,7 +111,7 @@ const deletePost = async (req, res, next) => {
     const { password } = req.body;
 
     // 해당 게시글이 있는지 확인
-    const post = await boardModel.findPost(id);
+    const post = await boardModel.existedPost(id);
     if (!post) {
       throw new Error(errorCodes.notBePost);
     }
