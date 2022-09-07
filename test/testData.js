@@ -1,4 +1,10 @@
 const data = {
+  emojiData: {
+    title: "테스트🚩🚩",
+    content: "슈퍼테스트🚩",
+    name: "작성자",
+    password: "KK11!!22",
+  },
   successData: {
     title: "테스트",
     content: "슈퍼테스트",

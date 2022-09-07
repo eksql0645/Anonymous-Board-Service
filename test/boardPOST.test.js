@@ -23,6 +23,18 @@ describe("POST/api/posts는", () => {
           done();
         });
     });
+    test("이모지를 사용할 수 있습니다.", (done) => {
+      request(app)
+        .post("/api/posts")
+        .send(data.emojiData)
+        .expect(201)
+        .end((err, res) => {
+          res.body.should.instanceof(Object);
+          res.body.should.have.property("title", "테스트🚩🚩");
+          res.body.should.have.property("content", "슈퍼테스트🚩");
+          done();
+        });
+    });
   });
 
   describe("실패 시 ", () => {
