@@ -20,12 +20,12 @@ module.exports = class Board extends Sequelize.Model {
           unique: false,
         },
         password: {
-          type: Sequelize.STRING(15),
+          type: Sequelize.STRING(80),
           allowNull: false,
           unique: false,
         },
         weather: {
-          type: Sequelize.STRING(10),
+          type: Sequelize.STRING(50),
           allowNull: false,
           unique: false,
         },
@@ -37,8 +37,8 @@ module.exports = class Board extends Sequelize.Model {
         modelName: "Board",
         tableName: "boards",
         paranoid: true,
-        charset: "utfmb4",
-        collate: "utfmb4_general_ci",
+        charset: "utf8mb4",
+        collate: "utf8mb4_general_ci",
       }
     );
   }

@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 
-const board = require("./models/board");
+const Board = require("./models/board");
 
 const db = {};
 const sequelize = new Sequelize(
@@ -14,8 +14,8 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 
-db.board = board;
+db.Board = Board;
 
-board.init(sequelize);
+Board.init(sequelize);
 
 module.exports = db;
