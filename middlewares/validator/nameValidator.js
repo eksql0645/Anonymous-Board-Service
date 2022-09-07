@@ -14,7 +14,7 @@ function nameValidator() {
       .withMessage(errorCodes.required)
       .trim()
       .isLength({ max: 10 })
-      .withMessage(errorCodes.wrongFormat),
+      .withMessage(errorCodes.tooLongName),
     index,
   ];
 }
