@@ -158,9 +158,7 @@ router.delete("/:id", passwordValidator(), boardService.deletePost);
  *            application/json:
  *              schema:
  *                type: object
- *                items:
- *                  type : object
- *                  example:
+ *                example:
  *                          {
  *                              "id": 50,
  *                              "title": "test2",
@@ -212,9 +210,7 @@ router.delete("/:id", passwordValidator(), boardService.deletePost);
  *            application/json:
  *              schema:
  *                type: object
- *                items:
- *                  type : object
- *                  example:
+ *                example:
  *                          {
  *                              "id": 50,
  *                              "title": "test2",

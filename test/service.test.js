@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-const { boardService } = require("./");
+const { boardService } = require("../services");
 const Board = require("../db/models/board");
 const httpMocks = require("node-mocks-http");
 const testBoards = require("./testBoards.json");

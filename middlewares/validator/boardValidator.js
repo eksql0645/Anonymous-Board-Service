@@ -16,14 +16,14 @@ function boardValidator() {
       .withMessage(errorCodes.required)
       .trim()
       .isLength({ max: 20 })
-      .withMessage(errorCodes.wrongFormat),
+      .withMessage(errorCodes.tooLongTitle),
     body("content")
       .notEmpty()
       .bail()
       .withMessage(errorCodes.required)
       .trim()
       .isLength({ max: 200 })
-      .withMessage(errorCodes.wrongFormat),
+      .withMessage(errorCodes.tooLongContent),
     index,
   ];
 }
