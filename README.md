@@ -1,4 +1,25 @@
-# 🚩 Anonymous Board
+# 목차
+[Anonymous Board](#-Anonymous-Board-Service)
+
+[요구사항 분석](#-요구사항-분석)
+
+[모델링](#-모델링)
+
+[API 문서](#-API-문서)
+
+[테스트 케이스](#-테스트-케이스)
+
+[컨벤션](#-컨벤션)
+
+[디렉토리 구조](#-디렉토리-구조)
+
+[패키지](#-패키지)
+
+[기술 스택](#-기술-스택)
+
+[문제 해결 과정](#-문제-해결-과정)
+
+# 🚩 Anonymous Board Service
 
 익명으로 게시글을 생성하고 비밀번호를 통해 수정, 삭제가 가능한 익명 게시판입니다.
 
@@ -25,7 +46,7 @@
 - request-promise 모듈을 사용하여 외부 API에 날씨 데이터를 요청하였습니다.
     - 날씨 데이터 요청 시 한글로 데이터를 받아오고, ip주소에 따른 날씨 데이터를 받아오도록 구현하였습니다.
 
-# 🛠 게시판 모델링
+# 🛠 모델링
 
 - 이모지 사용을 위해 charset을 utf8mb4로 설정했습니다.
 
@@ -38,11 +59,11 @@
 | 비밀번호 | password | varchar(80) |
 | 날씨 | weather | varchar(50) |
 
-## ERD
+## ✏ ERD
 
 ![image](https://user-images.githubusercontent.com/80232260/188899851-13ae7990-098a-49f4-823e-d49e99c0ae52.png)
 
-- 테이블 생성 쿼리
+## 🧩 테이블 생성 쿼리
 
 ```jsx
 CREATE TABLE `anonymousboard`.`boards` (
@@ -64,7 +85,7 @@ COMMENT = '익명 게시판';
 # 📑 API 문서
 npm start 후 http://localhost:8080/api-docs
 
-Swagger PDF 문서 
+[swagge PDF 문서](https://github.com/eksql0645/Anonymous-Board-Service/files/9507384/screencapture-localhost-8080-api-docs-2022-09-08-00_08_01.pdf)
 
 | 요청 | HTTP method | url | req | res | res.status |
 | --- | --- | --- | --- | --- | --- |
@@ -72,14 +93,20 @@ Swagger PDF 문서
 | 게시글 전체 조회 | get | api/posts/?page | req.query = page | [{ id, title, content, name, weather}, …] | 200 |
 | 게시글 조회 | get | api/posts/:id | req.params = id | { id, title, content, name, weather } | 200 |
 | 게시글 수정 | patch | api/posts/id | req.params = id <br> req.body = title, content, password | { id, title, content, name, weather } | 200 |
-| 게시글 삭제 | delete | api/posts/:id | req.params = id <br> req.body = password | { message: “게시글이 삭제되었습니다.” } | 200 |
+| 게시글 삭제 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | delete | api/posts/:id | req.params = id <br> req.body = password | { message: “게시글이 삭제되었습니다.” }  | 200 |
 
 # 📜 테스트 케이스
 
-- unitTest는 jest / 통합 테스트는 superTest로 진행하였습니다.
+- 유닛테스트는 jest / 통합 테스트는 superTest로 진행하였습니다.
 
 ![image](https://user-images.githubusercontent.com/80232260/188899659-4d1c07b1-6f4a-4dc4-851f-d9d4017b3f8b.png)
 ![image](https://user-images.githubusercontent.com/80232260/188899676-87434b28-2fb8-4669-9549-d02e9d25961f.png)
+![image](https://user-images.githubusercontent.com/80232260/188914393-04c2a80f-a9b1-4ecf-a243-a7eb1f342c54.png)
+![image](https://user-images.githubusercontent.com/80232260/188914441-718ec900-1144-493e-bd39-38089037dce0.png)
+![image](https://user-images.githubusercontent.com/80232260/188914511-a0ff0768-75cc-45d5-badd-74b80b89e5b7.png)
+![image](https://user-images.githubusercontent.com/80232260/188914568-3af9e255-f262-4605-a838-56250d8e6eb9.png)
+![image](https://user-images.githubusercontent.com/80232260/188914738-3c551013-b7f1-4cc9-aa62-a73f6684f056.png)
+![image](https://user-images.githubusercontent.com/80232260/188914673-fb40922f-227e-4f44-a3c2-479a28d2a6f3.png)
 
 # 💡 컨벤션
 
@@ -96,7 +123,7 @@ Swagger PDF 문서
 | 마지막 콤마 사용 | 한줄 최대 글자수: 80 |
 | var는 사용하지 않습니다. | 세미 콜론 사용을 허용합니다. |
 
-## branch명
+### ✔ branch명
 
 - 대문자 금지 / 언더바 금지
 - ‘-’ 사용
@@ -118,7 +145,7 @@ Swagger PDF 문서
 | 게시판 swagger | feature/board-swagger |
 | 게시판 refactoring | feature/board-refactoring |
 
-### Issue 형식
+### ✔ Issue 형식
 
 (브랜치명) | (이슈 간략 설명) / feature/board | create post API
 
@@ -204,12 +231,11 @@ ex) Github 소셜 로그인 기능이 필요합니다.
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/Sequelize-007396?style=for-the-badge&logo=Sequelize&logoColor=white">
 <img src="https://img.shields.io/badge/Swagger-61DAFB?style=for-the-badge&logo=Swagger&logoColor=white"> <img src="https://img.shields.io/badge/Jest-F8DC75?style=for-the-badge&logo=Jest&logoColor=white">
 
-# ✋ 트러블 슈팅
-- unit test를 할 때 jest를 배워보고 싶어 사용하였는데 처음 사용하다보니 많이 헤맸습니다.
-  - mocking함수를 만들고 예상 결과로 사용하였는데 계속 테스트에 실패했고 알고보니 요청을 보낸 데이터가 잘못되었기 때문이었습니다.
-  - 코드를 차근차근 하나씩 뜯어보면서 풀어갔습니다.
-  - 이외에도 더 자세한 테스트 코드를 작성하려했으나 원하는 메서드를 찾지 못했기 때문에 구체적인 유닛 테스트를 하지 못한 것이 아쉬웠습니다.
-- 외부 API에 요청을 통해 날씨 데이터를 보내는데 request 모듈이란 것이 있다는 것을 알고 사용하였습니다.
-  - 처음에 request 모듈을 사용하여 promise로 값을 리턴하였는데 계속 에러가 났고 구글링을 통해 request-promise가 있다는 것을 알게 되어 사용하면서 해결되었습니다.
-- 각 API에 따라 상태코드를 어떻게 보내야 할지 고민하였습니다.
-  - 게시글 조회시와 수정, 삭제 시 게시글이 없다면 400번 에러코드를 보내야 할 지 200번 정상 코드를 보내야 할 지가 가장 고민이 되었는데, 게시글 조회의 경우는 클라이언트 쪽에서 정상적으로 요청을 보냈기 때문에 200번 코드를 보내는게 맞다고 생각하였고, 게시글 수정, 삭제 시에는 존재하지 않는 게시글에 대해 사용자가 요청을 보냈기 때문에 클라이언트 쪽 요청이 잘못되었다고 판단하여 400번 에러를 보내기로 결정하였습니다. 
+# ✋ 문제 해결 과정
+- 1️⃣ unit test를 할 때 jest를 배워보고 싶어 사용하였는데 처음 사용하다보니 많이 헤맸습니다.
+  - mocking함수를 만들고 예상 결과로 사용하였는데 계속 테스트에 실패했고 알고보니 요청을 보낸 데이터가 잘못되었던게 원인이었는데, 코드를 차근차근 하나씩 뜯어보면서 풀어갔습니다.
+  - 더 구체적으로 유닛 테스트를 진행하려 했지만 원하는 메서드를 찾지 못해 진행하지 못해 아쉬웠습니다. 그렇지만 통합테스트를 통해 진행하지 못한 테스트들을 진행할 수 있었습니다. 알고보니 제가 하려던 것은 통합테스트를 통해 할 수 있던 것이었고 이번 기회를 통해 테스트코드 작성법과 유닛테스트와 통합테스트의 차이를 알게 되었습니다. 
+- 2️⃣ 외부 API에 요청을 통해 날씨 데이터를 보내는데 request 모듈이란 것이 있다는 것을 알고 사용하였습니다.
+  - 처음에 request 모듈을 사용하여 promise로 값을 리턴하였는데 계속 에러가 났고 구글링을 통해 request-promise가 있다는 것을 알게 되어 이를 이용해 해결하였습니다. 
+- 3️⃣ 각 API에 따라 상태코드를 어떻게 보내야 할지 고민하였습니다.
+  - 게시글 조회와 수정, 삭제 시 게시글이 없다면 400번 에러코드를 보내야 할 지, 200번 정상 코드를 보내야 할 지 고민 되었습니다. 세션을 통해 배운 정보와 구글링을 통해 상태코드에 대해 찾아보고 게시글 조회의 경우는 클라이언트 쪽에서 정상적으로 요청을 보냈기 때문에 200번 코드를 보내는게 맞다고 생각하였고, 게시글 수정, 삭제 시에는 존재하지 않는 게시글에 대해 사용자가 요청을 보냈기 때문에 클라이언트 쪽 요청이 잘못되었다고 판단하여 400번 에러를 보내기로 결정하였습니다. 
