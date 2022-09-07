@@ -9,6 +9,7 @@ const testBoards = require("./testBoards.json");
 Board.create = jest.fn();
 Board.findOne = jest.fn();
 Board.findAll = jest.fn();
+Board.update = jest.fn();
 
 // req, res, next mock 생성
 let req, res, next;
@@ -18,17 +19,16 @@ beforeEach(() => {
   next = jest.fn();
 });
 
-describe("addPost", () => {
+describe("board serivce 테스트", () => {
+  // 임시 데이터 req.body에 넣기
   beforeEach(() => {
     req.body = testBoards;
   });
-  // 임시 데이터 req.body에 넣기
-
   test("게시글이 생성되면 상태코드 201을 반환한다.", async () => {
     //boardService.addPost가 호출되면
     await boardService.addPost(req, res, next);
     // Board.create가 호출될 것이고
-    expect(Board.create).toBeCalled();
+    expect(Board.create).toBeCalledTimes(1);
     // 성공 시 상태코드 201을 반환한다.
     expect(res.statusCode).toBe(201);
   });
@@ -65,15 +65,10 @@ describe("addPost", () => {
   });
   test("게시글 수정에 성공하면 상태코드 200을 반환한다.", async () => {
     await boardService.setPost(req, res, next);
+    // 성공 시 상태코드 200을 반환한다.
+    expect(res.statusCode).toBe(200);
+  });
 
-    // 성공 시 상태코드 200을 반환한다.
-    expect(res.statusCode).toBe(200);
-  });
-  test("게시글 삭제에 성공하면 상태코드 200을 반환한다.", async () => {
-    await boardService.deletePost(req, res, next);
-    // 성공 시 상태코드 200을 반환한다.
-    expect(res.statusCode).toBe(200);
-  });
   test("게시글 삭제에 성공하면 상태코드 200을 반환한다.", async () => {
     await boardService.deletePost(req, res, next);
     // 성공 시 상태코드 200을 반환한다.
