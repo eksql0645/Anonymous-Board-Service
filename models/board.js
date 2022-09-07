@@ -9,6 +9,7 @@ const createPost = async (postInfo) => {
 // 전체 게시글 조회
 const findPosts = async (offset) => {
   const posts = await Board.findAll({
+    attributes: ["id", "title", "content", "name", "weather"],
     order: [["createdAt", "DESC"]],
     limit: 20,
     offset: offset,
@@ -18,7 +19,11 @@ const findPosts = async (offset) => {
 
 // 게시글 조회
 const findPost = async (id) => {
-  const post = await Board.findOne({ where: { id } });
+  const post = await Board.findOne({
+    attributes: ["id", "title", "content", "name", "weather"],
+    where: { id },
+  });
+
   return post;
 };
 
@@ -34,10 +39,20 @@ const destroyPost = async (id) => {
   return result;
 };
 
+// 게시글 찾기
+const existedPost = async (id) => {
+  const post = await Board.findOne({
+    where: { id },
+  });
+
+  return post;
+};
+
 module.exports = {
   createPost,
   findPost,
   findPosts,
   destroyPost,
   updatePost,
+  existedPost,
 };

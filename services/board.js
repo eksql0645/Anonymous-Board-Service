@@ -15,7 +15,14 @@ const addPost = async (req, res, next) => {
     };
     const post = await boardModel.createPost(postInfo);
 
-    res.status(201).json(post);
+    // 객체를 변수에 할당해서 보내려 했으나 테스트 시 상태코드가 다르게 나와 객체 자체를 보냄
+    res.status(201).json({
+      id: post.id,
+      title: post.title,
+      name: post.name,
+      content: post.content,
+      weather: post.weather,
+    });
   } catch (err) {
     next(err);
   }
@@ -67,11 +74,10 @@ const setPost = async (req, res, next) => {
     const { title, content, password } = req.body;
 
     // 해당 게시글이 있는지 확인
-    let post = await boardModel.findPost(id);
+    let post = await boardModel.existedPost(id);
     if (!post) {
       throw new Error("게시글이 존재하지 않습니다.");
     }
-
     const isPasswordCorrect = await bcrypt.compare(password, post.password);
     if (!isPasswordCorrect) {
       throw new Error("비밀번호가 일치하지 않습니다.");
@@ -87,7 +93,7 @@ const setPost = async (req, res, next) => {
     // 프론트가 있다는 가정 하에 수정된 post 객체를 보냄
     post = await boardModel.findPost(id);
 
-    res.status(201).json(post);
+    res.status(200).json(post);
   } catch (err) {
     next(err);
   }
